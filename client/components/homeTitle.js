@@ -54,6 +54,7 @@ export default class HomeTitle extends THREE.Object3D {
 
     this.description();
 
+    this.multilanguage();
   }
 
   description() {
@@ -208,11 +209,27 @@ export default class HomeTitle extends THREE.Object3D {
             this.display = false;
             if (this.cbStart) {
               this.cbStart();
+              this.nodeLang.remove();
             }
           }
         }
       }
     }
+  }
+
+  multilanguage() {
+    const node = document.createElement('div');
+    node.className = 'lang';
+    const link1 = document.createElement('a');
+    link1.href = 'https://www.codeurdenuit.fr/';
+    link1.textContent = '[fr]';
+    const link2 = document.createElement('a');
+    link2.href = 'https://www.codeurdenuit.net/';
+    link2.textContent = '[en]';
+    node.appendChild(link1);
+    node.appendChild(link2);
+    document.body.appendChild(node);
+    this.nodeLang = node;
   }
 
 }

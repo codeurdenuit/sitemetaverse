@@ -51,7 +51,6 @@ class Sky extends THREE.Mesh {
     const vertices = [], colors = [];
     const color1 = new THREE.Color(col1);
     const color2 = new THREE.Color(col2);
-    console.log(color1, color2)
     for (let i = 0; i < count; i++) {
       vertices.push(
         2 * radius * (Math.random() - 0.5),

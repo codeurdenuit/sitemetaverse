@@ -20,14 +20,11 @@ export default class MultiVisitor {
     this.userId = await this.psc.connect();
 
     const rooms = await this.psc.getRooms();
-    //console.log('existing room :', rooms);
     let room;
     if (rooms[this.roomId]) {
       room = await this.psc.joinRoom(this.roomId);
-      //console.log('Room joined user : '+this.userId);
     } else {
       room = await this.psc.createRoom(this.roomId);
-      //console.log('Room create user : '+this.userId);
     }
     this.refreshVisitors(room);
   }
@@ -48,7 +45,6 @@ export default class MultiVisitor {
   }
 
   async refreshVisitors(visitorsList) {
-    //console.log('4 room updated : ', visitorsList);
     if (visitorsList) {
       for (let i = 0; i < visitorsList.length; i++) {
         const visitorId = visitorsList[i];

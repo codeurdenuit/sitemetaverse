@@ -1,4 +1,8 @@
 import { Vector3 } from 'three';
+import fr from './wordingFr';
+import en from './wordingEn';
+const wording = location.host.includes('.fr') ? fr : en;
+
 const offsetZ = -3;
 export default {
   nodes: [
@@ -38,8 +42,7 @@ export default {
 
   ],
   scene: {
-    open: 'en savoir plus',
-    description: 'Cliquez pour entrer dans l\'univers Codeur de Nuit.',
+    description:  wording.description,
     moonPos: { pc: new Vector3(0, 60, -220), mo: new Vector3(0, 60, -220), vr: new Vector3(0, 80, -220) },
     titlePos: { pc: new Vector3(0, 0, -7), mo: new Vector3(0, 1, -3), vr: new Vector3(0, -2, -7) },
     treePos: { pc: new Vector3(0, 0, -7), mo: new Vector3(-0.1, 2.4, -2), vr: new Vector3(0, -2, -7) },
@@ -50,16 +53,8 @@ export default {
     backVisible: { pc: true, mo: true, vr: false },
     offsetTriggerForward :{ pc: 1, mo: 3, vr:3 },
     offsetTriggerBackward :{ pc: 8, mo: 8, vr:3 },
-    infoText : `A travers mes projets, je partage une vision.
-    Pour moi, le code est un outil créatif. 
-    Entre l'utilité et l'artistique, il permet de créer des univers et des expériences.
-    
-    J'essaye de développer une communauté afin de partager et trouver du soutien pour mes futurs projets.
-
-    Si vous pensez avoir un projet innovant et créatif (2D, 3D, VR), n'hésitez pas à me contacter par mail ou par twitter. (codeurdenuit@gmail.com)
-    Je suis déjà très occupé, mais j'ai plaisir à soutenir les projets en accord avec ma vision.    
-    `,
-    infoTitle : 'Codeur de nuit',
+    infoText : wording.infoText,
+    infoTitle : wording.infoTitle,
     infoPosition:  { pc: new Vector3(4.5, 1.75, -9.8), mo: new Vector3(-1.5, 1.75, -9.3), vr: new Vector3(4.5, 1.75, -9.8) },
     infoBackPosition:  { pc: new Vector3( -0.4, -1.74, 0.5), mo: new Vector3( -0.4, -1.74, 0.5), vr: new Vector3(0, -1.74, 1) },
     rooms: [
@@ -67,10 +62,10 @@ export default {
         indexNode: 1,
         mesh: 'room1',
         icon: 'icon-codeurdenuit',
-        title: 'Codeur de nuit',
-        text: 'Le code est un moyen d\'expression, une source de créativité sans limite. J\'expérimente ici ce que pourrait donner un site webVR dans le Métavers. Utilisez un Casque VR pour une meilleure expérience',
+        title: wording.rooms[0].title,
+        text: wording.rooms[0].text,
         anim: 'codeur',
-        button: 'En savoir plus',
+        button: wording.rooms[0].button,
         vrOnly: false,
         colorShape: 0x000001,
         links: [{ text: 'dungeonvr.codeurdenuit.fr', url: 'https://dungeonvr.codeurdenuit.fr/' }, { text: 'www.yobox.io', url: 'https://www.yobox.io/' }],
@@ -84,10 +79,10 @@ export default {
         indexNode: 2,
         mesh: 'room2',
         icon: 'icon-youtube',
-        title: 'Ma chaîne Youtube',
-        text: 'Je présente mes projets, mes expériences techniques et concepts. La chaîne débute, n\'hésitez pas à venir jeter un oeil',
+        title: wording.rooms[1].title,
+        text: wording.rooms[1].text,
         anim: 'youtube',
-        button: 'Entrer',
+        button: wording.rooms[1].button,
         vrOnly: false,
         iconColor: 0xd00000,
         colorShape: 0xffffff,
@@ -102,10 +97,10 @@ export default {
         indexNode: 3,
         mesh: 'room3',
         icon: 'icon-twitter',
-        title: 'Suivez moi sur Twitter',
-        text: 'Je communique sur mes projets en cours et à venir. J\'utilise aussi twitter comme moyen de contact.',
+        title: wording.rooms[2].title,
+        text: wording.rooms[2].text,
         anim: 'twitter',
-        button: 'Entrer',
+        button: wording.rooms[2].button,
         vrOnly: false,
         iconColor: 0x007FAA,
         colorShape: 0xffffff,
@@ -120,10 +115,10 @@ export default {
         indexNode: 4,
         mesh: 'room4',
         icon: 'icon-univers',
-        title: 'Expérimentation',
-        text: 'Cette zone n\'est accessible qu\'en VR. N\'hésitez pas à revenir avec votre casque',
+        title: wording.rooms[3].title,
+        text: wording.rooms[3].text,
         anim: 'playvr',
-        button: 'Entrer',
+        button: wording.rooms[3].button,
         vrOnly: true,
         iconColor: 0xb3851f,
         colorShape: 0xffffff,
