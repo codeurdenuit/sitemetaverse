@@ -102,7 +102,7 @@ export default {
         anim: 'twitter',
         button: wording.rooms[2].button,
         vrOnly: false,
-        iconColor: 0x007FAA,
+        iconColor: 0x1c9fca,
         colorShape: 0xffffff,
         links: [{ text: 'twitter.com/Codeur_de_nuit', url: 'https://twitter.com/Codeur_de_nuit' }],
         position: { pc: new Vector3(3, 0.01, -31), mo: new Vector3(-3, 0.01, -31), vr: new Vector3(3, 0.01, -31) },
@@ -125,7 +125,7 @@ export default {
         position: { pc: new Vector3(-3, 0.01, -40), mo: new Vector3(3, 0.01, -40), vr: new Vector3(-3, 0.01, -40) },
         panelPos: { pc: new Vector3(3.5, 1, 1), mo: new Vector3(0.5, 1, 2.9), vr: new Vector3(3.5, 1, 1) },
         backPos: { pc: new Vector3(-3.5, -0.95, 1.4), mo: new Vector3(-1, -1, 0.3), vr: new Vector3(-3.5, -0.95, 1.4) },
-        lightIntensity:3,
+        lightIntensity:1,
         lightDistance: 4
       }
     ]

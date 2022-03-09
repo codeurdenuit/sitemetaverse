@@ -49,6 +49,7 @@ export default class Visitor {
 
     const x = this.meshHeadset.matrixWorld.elements[12];
     const z = this.meshHeadset.matrixWorld.elements[14];
+
     this.meshHeadset.visible = (Math.abs(userPosition.x - x) > 0.3 || Math.abs(userPosition.z - z) > 0.3);
   }
 

@@ -4,12 +4,12 @@ export default {
   infoTitle: 'Codeur de Nuit',
   infoText: `Through all my projects, I'm trying to share a vision.
   To me, coding is a creative tool. 
-  It allows you produce service applications as well as creating universes and experiences.
+  It allows you to produce service applications as well as creating universes and experiences.
   
   I'm trying to develop a community to share my creations and find support for my future projects.
 
   If you think you have an innovative and creative project (2D, 3D, VR), feel free to contact me by email or twitter. (codeurdenuit@gmail.com)
-  I'm often busy, but I'm pleasure to supporting projects in line with my vision.    
+  I'm often busy, but I'm pleased to support projects in line with my vision.    
   `,
   rooms: [
     {
