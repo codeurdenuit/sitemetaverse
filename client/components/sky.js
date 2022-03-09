@@ -18,9 +18,9 @@ class Sky extends THREE.Mesh {
 
     this.layout2 = this.computeStars(radius, dendity * 2, 0xaaaaaa, 1);
 
-    this.layout3 = this.computeFirefly(radius, dendity, 0xff44ff, 0x0000ff, 2.6, sprite);
+    this.layout3 = this.computeFirefly(radius, dendity, 0xff44ff, 0x0000ff, 1.6, sprite);
 
-    this.layout4 = this.computeFirefly(radius, dendity, 0xff44ff, 0x0000ff, 2.6, sprite);
+    this.layout4 = this.computeFirefly(radius, dendity, 0xff44ff, 0x0000ff, 1.6, sprite);
 
     this.add(this.layout1);
     this.add(this.layout2);
