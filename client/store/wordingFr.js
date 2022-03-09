@@ -19,7 +19,7 @@ export default {
     },
     {
       title: 'Ma chaîne Youtube',
-      text: 'Je présente mes projets, mes expériences techniques et concepts. La chaîne débute, n\'hésitez pas à venir jeter un oeil',
+      text: 'Je présente mes projets, mes expériences techniques et concepts. Je fais aussi un peu de vulgarisation technique. La chaîne débute, n\'hésitez pas à venir jeter un oeil',
       button: 'Entrer',
     },
     {

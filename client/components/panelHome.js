@@ -41,7 +41,7 @@ class Panel extends THREE.Object3D {
     contentContainer.add(
       new ThreeMeshUI.Text({
         content: text,
-        fontSize: 0.10
+        fontSize: 0.1
       })
     );
 

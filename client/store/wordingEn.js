@@ -1,25 +1,25 @@
 
 export default {
-  description: 'Click to enter into Codeur De Nuit universe',
+  description: `Click to start`,
   infoTitle: 'Codeur de Nuit',
-  infoText: `Through my projects, I try to share a vision.
-  For me, code is a creative tool. 
-  It lets you produce service applications, but it also lets you create universes and experiences.
+  infoText: `Through all my projects, I'm trying to share a vision.
+  To me, coding is a creative tool. 
+  It allows you produce service applications as well as creating universes and experiences.
   
   I'm trying to develop a community to share my creations and find support for my future projects.
 
-  If you think you have an innovative and creative project (2D, 3D, VR), feel free to contact me by email or twitter.. (codeurdenuit@gmail.com)
+  If you think you have an innovative and creative project (2D, 3D, VR), feel free to contact me by email or twitter. (codeurdenuit@gmail.com)
   I'm often busy, but I'm pleasure to supporting projects in line with my vision.    
   `,
   rooms: [
     {
       title: 'Codeur de nuit',
-      text: 'The code is a means of expression, a source of unlimited creativity. I experiment here what a VR website could be in the Metaverse. If possible, use a VR Headset for a better experience',
+      text: 'Coding is a powerful tool to express yourself, a source for unlimited creativity where every dream come true. Let\'s experiment together what a website would look like in the Metaverse. Using a VR headset is strongly advised. Have fun!' ,
       button: 'More information',
     },
     {
       title: 'My youtube channel',
-      text: 'I present my projects, my technical experiences and concepts. The channel is starting, don\'t hesitate to come and take a look.',
+      text: 'I present my projects, my technical experiences and concepts. I also do popularization. The channel is starting, don\'t hesitate to come and take a look.',
       button: 'Come in',
     },
     {
