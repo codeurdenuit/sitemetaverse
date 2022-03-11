@@ -11,10 +11,10 @@ class Scene extends THREE.Scene {
     this.add(this.root);
   }
 
-  async _init(indexUniverse) {
+  async _init(indexUniverse, camera) {
     this.index = indexUniverse;
     this.initialised = true;
-    await this.init();
+    await this.init(camera);
   }
 
   onOpenUniverse(cb) {
@@ -27,6 +27,14 @@ class Scene extends THREE.Scene {
 
   onJumpUniverse(cb) {
     this.jumpUniverse = cb;
+  }
+
+  onDeviceChange(device) {
+    
+  }
+
+  refreshSceneState() {
+
   }
 }
 

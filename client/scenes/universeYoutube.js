@@ -162,7 +162,7 @@ export default class UniverseYoutube extends Scene {
     }
   }
 
-  onDeviceChange(device) {
+  refreshSceneState(device) {
     const sceneStore = store.universes[this.index].scene;
     this.title.position.copy(sceneStore.title[device]);
     this.meshBox.position.copy(sceneStore.area[device]);

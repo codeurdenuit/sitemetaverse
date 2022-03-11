@@ -58,6 +58,10 @@ class Room extends THREE.Object3D {
     this.position.copy(position);
     this.panel.position.copy(panelPos);
     this.panel.button.visible = buttonDisplayed;
+    if(this.meshIcon.screened) {
+      const spacingIcon = store.device === mo ? 0.28 : 0.08;
+      this.meshIcon.screenPosition.set(0.43 - (this.indexNode - 1) * spacingIcon, -0.5 );
+    }
   }
 
   computeComposingAnim(materialRoom) {

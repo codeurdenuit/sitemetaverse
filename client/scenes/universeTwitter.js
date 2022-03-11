@@ -131,10 +131,10 @@ export default class UniverseTwitter extends Scene {
     }
   }
 
-  onDeviceChange(device) {
+  refreshSceneState(device) {
     const sceneStore = store.universes[this.index].scene;
-    this.meshRoom.position.copy(sceneStore.area[store.device]);
-    this.iconBack.visible = sceneStore.backVisible[store.device];
+    this.meshRoom.position.copy(sceneStore.area[device]);
+    this.iconBack.visible = sceneStore.backVisible[device];
     const nodes = store.universes[this.index].nodes;
     for (let i = 0; i < this.panels.length; i++) {
       const camTarget = nodes[i].camTarget[device];
@@ -143,11 +143,6 @@ export default class UniverseTwitter extends Scene {
       panel.position.z = camTarget.z;
       panel.rotation.y = sceneStore.angleStep * i + sceneStore.angleStart - Math.PI / 2;
       panel.container.frame.material.side = THREE.DoubleSide;
-    }
-    if(device === 'vr') {
-      this.add(this.laser);
-    }else{
-      this.remove(this.laser);
     }
   }
 }

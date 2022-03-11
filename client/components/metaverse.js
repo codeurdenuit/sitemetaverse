@@ -196,7 +196,7 @@ class Metaverse {
     const previousPos = camera.position.clone();
     if (inputs.xr) {
       if (inputs.controllerRightButton2) {
-        const speed = 15;
+        const speed = 2;
         const vector = new THREE.Vector3();
         this.inputs.controllerRight.getWorldDirection(vector);
         vector.negate();
@@ -301,7 +301,7 @@ class Metaverse {
     this.sceneForeground = this.universes[sceneFrontIndex];
     this.sceneForeground.currentWord = true;
     if (!this.sceneForeground.initialised) {
-      await this.sceneForeground._init(sceneFrontIndex);
+      await this.sceneForeground._init(sceneFrontIndex, this.camera);
       this.sceneForeground.onOpenUniverse(this.openUniverse.bind(this));
       this.sceneForeground.onCloseUniverse(this.closeUniverse.bind(this));
       this.sceneForeground.onJumpUniverse(this.jumpUniverse.bind(this));
@@ -310,7 +310,7 @@ class Metaverse {
       this.sceneBackground = this.universes[sceneBackIndex];
       this.sceneBackIndex = sceneBackIndex;
       if (!this.sceneBackground.initialised) {
-        await this.sceneBackground._init(sceneBackIndex);
+        await this.sceneBackground._init(sceneBackIndex, this.camera);
         this.sceneBackground.onOpenUniverse(this.openUniverse.bind(this));
         this.sceneBackground.onCloseUniverse(this.closeUniverse.bind(this));
         this.sceneBackground.onJumpUniverse(this.jumpUniverse.bind(this));
@@ -320,7 +320,10 @@ class Metaverse {
       this.sceneBackground = null;
       this.sceneBackIndex = '';
     }
-    this.updateDevice();
+    this.sceneForeground.refreshSceneState(store.device);
+    if(this.sceneBackground) {
+      this.sceneBackground.refreshSceneState(store.device);
+    }
   }
 
   async openUniverse(indexUniverse, portalPos) {
@@ -397,12 +400,12 @@ class Metaverse {
     store.ratio = window.innerWidth / window.innerHeight;
 
 
-
-
-    if (this.sceneForeground) {
+    if (this.sceneForeground) { 
+      this.sceneForeground.refreshSceneState(store.device);
       this.sceneForeground.onDeviceChange(store.device);
     }
     if (this.sceneBackground) {
+      this.sceneBackground.refreshSceneState(store.device);
       this.sceneBackground.onDeviceChange(store.device);
     }
   }

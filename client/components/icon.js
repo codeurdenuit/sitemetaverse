@@ -86,8 +86,12 @@ export default class Icon extends THREE.Mesh {
           this.position.y = -2;
           this.size = this.storeSize;
         }else {
+          this.size = this.sizeScreen;
           this.forceSceenPositon(camera);
         }
+      } else {
+        this.position.y = 1;
+        this.size = this.storeSize;
       }
     }
     this.checkInteracting(raycaster, dt, inputs);
@@ -145,11 +149,6 @@ export default class Icon extends THREE.Mesh {
     this.screened = true;
     this.screenPosition.set(x, y);
     this.size = this.sizeScreen;
-  }
-
-  init() {
-    this.position.copy(this.storedPoition);
-    this.screened = false;
   }
 
   animationEnter(dt) {

@@ -17,7 +17,9 @@ import store from '../store';
 
 export default class UniverseHome extends Scene {
 
-  async init() {
+  async init(camera) {
+
+    this.camera = camera;
 
     this.lightAmbient = new THREE.AmbientLight(0x404050);
     this.add(this.lightAmbient);
@@ -83,10 +85,7 @@ export default class UniverseHome extends Scene {
       });
       room.onHide(() => {
         this.character.stopAnimation();
-        const nextRoomParam = rooms[i-1];
-        if(nextRoomParam) {
-          this.character.playAnimation(nextRoomParam.anim, nextRoomParam.position[store.device]);
-        }
+        this.restartNearestAnimation();
       });
       if (i === 0) {
         room.onClickPanel(() => {
@@ -189,8 +188,32 @@ export default class UniverseHome extends Scene {
     }
   }
 
+  restartNearestAnimation() {
+    const rooms = store.universes[this.index].scene.rooms;
+    for (let i = 0; i < this.rooms.length; i++) {
+      this.rooms[i].getWorldPosition(this.vectorTemp);
+      const distance = this.vectorTemp.z - this.camera.position.z;
+      if (Math.abs(distance) < 8) {
+        this.character.playAnimation(rooms[i].anim, rooms[i].position[store.device]);
+      }
+    }
+  }
+
   onDeviceChange(device) {
     const sceneStore = store.universes[this.index].scene;
+    if(store.indexNode > 0) {
+      const currentRoomParam = sceneStore.rooms[store.indexNode-1];
+      if(currentRoomParam) {
+        this.character.position.copy(currentRoomParam.position[device]);
+      }
+    }
+    this.character.stopAnimation();
+    this.restartNearestAnimation();
+  }
+
+  refreshSceneState(device) {
+    const sceneStore = store.universes[this.index].scene;
+    const roomsStore = sceneStore.rooms;
     this.cat.position.copy(sceneStore.catPos[store.device]);
     this.title.position.copy(sceneStore.titlePos[store.device]);
     this.meshTree.position.copy(sceneStore.treePos[store.device]);
@@ -203,24 +226,13 @@ export default class UniverseHome extends Scene {
     if(device === 'vr') {
       this.add(this.laser);
       this.remove(this.light);
-      this.character.stopAnimation();
     }else{
       this.remove(this.laser);
       this.add(this.light);
     }
 
-    const roomsStore = sceneStore.rooms;
     for (let i = 0; i < this.rooms.length; i++) {
       this.rooms[i].redraw(roomsStore[i].position[store.device], roomsStore[i].panelPos[store.device], !roomsStore[i].vrOnly||device==='vr' );
-      if(device==='vr') {
-        this.rooms[i].meshIcon.init();
-      }
-    }
-    if(store.indexNode > 0) {
-      const currentRoomParam = sceneStore.rooms[store.indexNode-1];
-      if(currentRoomParam) {
-        this.character.position.copy(currentRoomParam.position[device]);
-      }
     }
 
   }

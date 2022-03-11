@@ -88,9 +88,6 @@ export default class UniverseTwitter extends Scene {
     this.openUniverse(nextNode.portalUniverse, nextNode.portalPos[store.device]);
   }
 
-  onDeviceChange() {
-  }
-
   getTexture() {
     const canvas = document.createElement('canvas');
     const diameter = 64;

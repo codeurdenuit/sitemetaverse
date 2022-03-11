@@ -68,7 +68,4 @@ export default class UniverseHomeFake extends Scene {
     this.area.update(camera);
   }
 
-  onDeviceChange() {
-
-  }
 }
