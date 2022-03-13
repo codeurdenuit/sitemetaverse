@@ -172,17 +172,42 @@ export default class HomeTitle extends THREE.Object3D {
       this.updateVerticesTitle(this.tempoParticleIn / 2, true);
     } else {
       if (!this.closing) {
-        if (raycaster && raycaster.intersectObject(this.mesh).length) {
-          if (inputs.mouseButton || inputs.controllerRightButton1) {
-            this.tempoParticleOut = 1;
-            this.closing = true;
+
+        if (raycaster) {
+          if (raycaster.intersectObject(this.mesh).length) {
+            if (inputs.mouseButton || inputs.controllerRightButton1) {
+              this.tempoParticleOut = 1;
+              this.closing = true;
+            } else {
+              document.body.style.cursor = 'pointer';
+              this.mesh.material.uniforms.color.value = new THREE.Color(0xff44ff);
+            }
           } else {
-            document.body.style.cursor = 'pointer';
-            this.mesh.material.uniforms.color.value = new THREE.Color(0xff44ff);
+            this.mesh.material.uniforms.color.value = new THREE.Color(0xffffff);
           }
-        } else {
-          this.mesh.material.uniforms.color.value = new THREE.Color(0xffffff);
+          if (raycaster.intersectObject(this.description.frame).length) {
+            if (inputs.mouseButton || inputs.controllerRightButton1) {
+              this.tempoParticleOut = 1;
+              this.closing = true;
+            } else {
+              document.body.style.cursor = 'pointer';
+              this.description.set({
+                fontColor: new THREE.Color(0xff44ff),
+              });
+            }
+          } else {
+            this.description.set({
+              fontColor: new THREE.Color(0xffffff),
+            });
+          }
         }
+
+
+
+
+
+
+
 
         let descOpacity = this.description.fontOpacity;
         if (descOpacity != 1) {
