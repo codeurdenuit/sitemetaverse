@@ -30,18 +30,42 @@ export default class UniverseTwitter extends Scene {
     this.meshSky = new THREE.Mesh(new THREE.BoxGeometry(600, 600, 600), new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.BackSide }));
     this.add(this.meshSky);
 
-    this.iconBack = new Icon('icon-back', null, 0x000001);
+    this.iconBack = new Icon('icon-back', undefined, 0x000000);
     this.iconBack.rotation.z = -Math.PI / 2;
     this.iconBack.rotation.x = -Math.PI / 2;
     this.iconBack.toScreen(0.43, -0.5);
     this.iconBack.onClick(() => {
-      if (store.indexNode != 6) {
-        store.indexNode = 6;
-      } else {
-        this.backToHome();
+      if (store.indexNode === 6) {
+        store.indexNode = 3;
+        store.indexUniverse = 0;
       }
     });
     this.root.add(this.iconBack);
+
+
+    this.iconPrevious = new Icon('icon-previous', undefined, 0x000000);
+    this.iconPrevious.rotation.z = -Math.PI / 2;
+    this.iconPrevious.rotation.x = -Math.PI / 2;
+    this.iconPrevious.toScreen(0.43, -0.5);
+    this.iconPrevious.onClick(() => {
+      if (store.indexNode < 6) {
+        store.indexNode = 6;
+        this.iconBack.tempoClickValue = 1.5;
+      }
+    });
+    this.root.add(this.iconPrevious);
+
+    this.iconNext = new Icon('icon-next', undefined, 0x000000);
+    this.iconNext.rotation.z = -Math.PI / 2;
+    this.iconNext.rotation.x = -Math.PI / 2;
+    this.iconNext.toScreen(0.43, -0.5);
+    this.iconNext.onClick(() => {
+      if (store.indexNode > 6) {
+        store.indexNode = 6;
+        this.iconBack.tempoClickValue = 1.5;
+      }
+    });
+    this.root.add(this.iconNext);
 
 
     this.panels = [];
@@ -77,10 +101,6 @@ export default class UniverseTwitter extends Scene {
     this.topPanel = 0.45;
   }
 
-  backToHome() {
-    store.indexNode = 3;
-    store.indexUniverse = 0;
-  }
 
   onClosed() {
     for (let i = 0; i < this.panels.length; i++) {
@@ -88,16 +108,22 @@ export default class UniverseTwitter extends Scene {
     }
   }
 
-
   update(dt, inputs, camera, raycaster) {
 
     if (this.currentWord) {
       if (!inputs.xr) {
         this.iconBack.update(dt, raycaster, inputs, camera);
-        this.iconBack.visible = true;
+        this.iconPrevious.update(dt, raycaster, inputs, camera);
+        this.iconNext.update(dt, raycaster, inputs, camera);
+        const indexNode = store.indexNode;
+        this.iconPrevious.visible = indexNode < 6;
+        this.iconNext.visible = indexNode > 6;
+        this.iconBack.visible = indexNode === 6
       }
     } else {
       this.iconBack.visible = false;
+      this.iconPrevious.visible = false;
+      this.iconNext.visible = false;
     }
 
     for (let i = 0; i < this.panels.length; i++) {
@@ -134,7 +160,13 @@ export default class UniverseTwitter extends Scene {
   refreshSceneState(device) {
     const sceneStore = store.universes[this.index].scene;
     this.meshRoom.position.copy(sceneStore.area[device]);
-    this.iconBack.visible = sceneStore.backVisible[device];
+
+    if (sceneStore.buttonVisible[device]) {
+      const indexNode = store.indexNode;
+      this.iconPrevious.visible = indexNode < 6;
+      this.iconNext.visible = indexNode > 6;
+      this.iconBack.visible = indexNode === 6
+    }
     const nodes = store.universes[this.index].nodes;
     for (let i = 0; i < this.panels.length; i++) {
       const camTarget = nodes[i].camTarget[device];

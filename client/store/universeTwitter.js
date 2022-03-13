@@ -45,7 +45,7 @@ export default {
     title: { pc: new Vector3(0, -0.3, -39), mo: new Vector3(-3, 0.2, -39), vr: new Vector3(0, -0.42, -39) },
     //back: { pc: new Vector3(0, 0.2, -39.5), mo: new Vector3(-3, 0.2, -39.5), vr: new Vector3(0, 0, -39.5) },
     area: { pc: new Vector3(0, 0, -34), mo: new Vector3(-3, -0, -34), vr: new Vector3(0, 0, -34) },
-    backVisible: { pc: true, mo: true, vr: false },
+    buttonVisible: { pc: true, mo: true, vr: false },
     angleStep,
     angleStart
   }

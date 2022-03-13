@@ -7,9 +7,9 @@ const _v1 = new THREE.Vector3();
 const _q1 = new THREE.Quaternion();
 const vr = 'vr';
 const iconSize = 1;
-const geometryCylinder = new THREE.CylinderGeometry( iconSize, iconSize, 0.15, 30 );
-geometryCylinder.rotateZ(Math.PI/2);
-customUV(geometryCylinder, iconSize, {x:0.00390625, y:0.01953125, w:0.0791015625});
+const geometryCylinder = new THREE.CylinderGeometry(iconSize, iconSize, 0.15, 30);
+geometryCylinder.rotateZ(Math.PI / 2);
+customUV(geometryCylinder, iconSize, { x: 0.00390625, y: 0.01953125, w: 0.0791015625 });
 
 
 export default class Icon extends THREE.Mesh {
@@ -17,21 +17,21 @@ export default class Icon extends THREE.Mesh {
   constructor(meshName, color, colorShape) {
     super();
     const textureColor = store.getTexture('textureColor');
-    if(color) {
-      this.materialBlur = new THREE.MeshPhongMaterial({ color:color, shininess: 5, emissive: new THREE.Color(color).multiplyScalar(0.7) });
+    if (color !== undefined) {
+      this.materialBlur = new THREE.MeshPhongMaterial({ color: color, shininess: 5, emissive: new THREE.Color(color).multiplyScalar(0.7) });
     } else {
-      this.materialBlur = new THREE.MeshPhongMaterial({ map: textureColor, shininess: 5, emissiveMap: textureColor , emissive:0xA0A1A2});
+      this.materialBlur = new THREE.MeshPhongMaterial({ map: textureColor, shininess: 5, emissiveMap: textureColor, emissive: 0xA0A1A2 });
     }
-    if(colorShape) {
-      this.materialShape = new THREE.MeshPhongMaterial({ color:colorShape, shininess: 5, emissive: new THREE.Color(colorShape).multiplyScalar(0.8) });
-    }else {
-      this.materialShape = new THREE.MeshPhongMaterial({ map: textureColor, shininess: 5, emissiveMap: textureColor,emissive:0xaaaaaa});
+    if (colorShape !== undefined) {
+      this.materialShape = new THREE.MeshPhongMaterial({ color: colorShape, shininess: 5, emissive: new THREE.Color(colorShape).multiplyScalar(0.8) });
+    } else {
+      this.materialShape = new THREE.MeshPhongMaterial({ map: textureColor, shininess: 5, emissiveMap: textureColor, emissive: 0xaaaaaa });
     }
 
-    if(color) {
-      this.materialFocus = new THREE.MeshPhongMaterial({ color:color, shininess: 5, emissive: new THREE.Color(color) });
+    if (color !== undefined) {
+      this.materialFocus = new THREE.MeshPhongMaterial({ color: color, shininess: 5, emissive: new THREE.Color(color) });
     } else {
-      this.materialFocus = new THREE.MeshPhongMaterial({ map: textureColor, shininess: 5, emissiveMap: textureColor , emissive:0xffffff});
+      this.materialFocus = new THREE.MeshPhongMaterial({ map: textureColor, shininess: 5, emissiveMap: textureColor, emissive: 0xffffff });
     }
 
     this.geometry = geometryCylinder;
@@ -45,7 +45,7 @@ export default class Icon extends THREE.Mesh {
     this.size = 1;
     this.storeSize = 1;
     this.sizeScreen = 0.05;
-    this.tempoClickValue = 0;
+    this.tempoClickValue = 1;
     this.tempoClickOrder = 1;
     this.storedPoition = new THREE.Vector3();
     this.storedQuaternion = new THREE.Quaternion();
@@ -82,10 +82,10 @@ export default class Icon extends THREE.Mesh {
       this.animationEnter(dt);
     } else {
       if (this.screened) {
-        if(inputs.xr) {
+        if (inputs.xr) {
           this.position.y = -2;
           this.size = this.storeSize;
-        }else {
+        } else {
           this.size = this.sizeScreen;
           this.forceSceenPositon(camera);
         }
@@ -99,7 +99,7 @@ export default class Icon extends THREE.Mesh {
 
   checkInteracting(raycaster, dt, inputs) {
     this.scale.set(this.size, this.size, this.size);
-    if (raycaster.intersectObject(this).length) {
+    if (raycaster.intersectObject(this).length && this.visible) {
       if (inputs.mouseButton) {
         this.onFocus();
         if (this.click && this.animationProgress === 0) {
@@ -124,7 +124,7 @@ export default class Icon extends THREE.Mesh {
   }
 
   startAnimationEnter() {
-    
+
     this.position.z = this.storedPoition.z - 600;
     this.animationEnterRunning = true;
   }
@@ -163,8 +163,8 @@ export default class Icon extends THREE.Mesh {
   animationScreen(dt, camera) {
     this.animationProgress -= dt;
 
-    if(this.animationProgress<0) this.animationProgress=0; 
-  
+    if (this.animationProgress < 0) this.animationProgress = 0;
+
     let p1 = 1 - this.animationProgress;
     let p2 = this.animationProgress;
     if (this.animationRollback) {
@@ -172,7 +172,7 @@ export default class Icon extends THREE.Mesh {
       p2 = 1 - this.animationProgress;
     }
 
-    if(store.device !== vr) {
+    if (store.device !== vr) {
       this.positionTemp.copy(camera.position.clone());
       this.parent.worldToLocal(this.positionTemp);
       this.quaternionTemp.copy(camera.quaternion);
@@ -184,19 +184,19 @@ export default class Icon extends THREE.Mesh {
       this.positionTemp.add(_v1.multiplyScalar(this.screenPosition.y));
       _q1.setFromAxisAngle(_yAxis, -Math.PI / 2);
       this.quaternionTemp.multiply(_q1);
-  
+
       this.position.x = this.positionTemp.x * p1 + this.storedPoition.x * p2;
       this.position.y = this.positionTemp.y * p1 + this.storedPoition.y * p2;
       this.position.z = this.positionTemp.z * p1 + this.storedPoition.z * p2;
-  
+
       this.quaternion.x = this.quaternionTemp.x * p1 + this.storedQuaternion.x * p2;
       this.quaternion.y = this.quaternionTemp.y * p1 + this.storedQuaternion.y * p2;
       this.quaternion.z = this.quaternionTemp.z * p1 + this.storedQuaternion.z * p2;
       this.quaternion.w = this.quaternionTemp.w * p1 + this.storedQuaternion.w * p2;
-  
+
       this.size = this.sizeScreen * p1 + this.storeSize * p2;
       this.scale.x = this.size;
-      this.scale.y = this.size; 
+      this.scale.y = this.size;
       this.scale.z = this.size;
     } else {
       this.position.copy(this.storedPoition);
@@ -235,14 +235,14 @@ export default class Icon extends THREE.Mesh {
 function customUV(geometry, size, line) {
   const pos = geometry.attributes.position.array;
   const uv = geometry.attributes.uv.array;
-  const count = pos.length/3;
+  const count = pos.length / 3;
   const y = line.y;
   const x = line.x;
   const w = line.w;
   for (let i = 0; i < count; i += 1) {
     const z1 = pos[i * 3 + 2];
-    const percentW = (z1+size)/(2*size);
-    uv[i * 2 + 0] = x+w-w*percentW;
+    const percentW = (z1 + size) / (2 * size);
+    uv[i * 2 + 0] = x + w - w * percentW;
     uv[i * 2 + 1] = y;
   }
 }

@@ -46,19 +46,33 @@ export default class UniverseYoutube extends Scene {
     shadowTitle.scale.multiplyScalar(3);
     this.title.add(shadowTitle);
 
-    this.iconBack = new Icon('icon-back', null, 0x000001);
+    this.iconBack = new Icon('icon-back', undefined, 0x000001);
     this.iconBack.rotation.z = -Math.PI / 2;
     this.iconBack.rotation.x = -Math.PI / 2;
     this.iconBack.toScreen(0.43, -0.5);
     this.iconBack.onClick(() => {
-      if (store.indexNode != 0) {
-        store.indexNode=0;
-      } else {
-        this.backToHome();
+      const currentNode = store.universes[store.indexUniverse].nodes[store.indexNode];
+      store.indexUniverse = currentNode.portalUniverse;
+      store.indexNode = currentNode.portalNode;
+      for (let i = 0; i < this.panels.length; i++) {
+        this.panels[i].pause();
       }
     });
     this.root.add(this.iconBack);
 
+
+    this.iconPrevious = new Icon('icon-next', undefined, 0x000001);
+    this.iconPrevious.rotation.z = -Math.PI / 2;
+    this.iconPrevious.rotation.x = -Math.PI / 2;
+    this.iconPrevious.toScreen(0.43, -0.5);
+    this.iconPrevious.onClick(() => {
+      if (store.indexNode != 0) {
+        store.indexNode=0;
+        this.iconBack.visible = true;
+        this.iconPrevious.visible = false;
+      }
+    });
+    this.root.add(this.iconPrevious);
 
 
 
@@ -82,15 +96,6 @@ export default class UniverseYoutube extends Scene {
     this.add(this.laser);
   }
 
-  backToHome() {
-    const currentNode = store.universes[store.indexUniverse].nodes[store.indexNode];
-    store.indexUniverse = currentNode.portalUniverse;
-    store.indexNode = currentNode.portalNode;
-    for (let i = 0; i < this.panels.length; i++) {
-      this.panels[i].pause();
-    }
-  }
-
   onClosed() {
     for (let i = 0; i < this.panels.length; i++) {
       this.panels[i].position.y = i + 8;
@@ -101,8 +106,10 @@ export default class UniverseYoutube extends Scene {
 
     if (this.currentWord) {
       if (!inputs.xr) {
+        if(this.iconBack.visible)
         this.iconBack.update(dt, raycaster, inputs, camera);
-        this.iconBack.visible = true;
+        if(this.iconPrevious.visible)
+        this.iconPrevious.update(dt, raycaster, inputs, camera);
         this.light.position.copy(camera.position);
         this.light.position.x -=1;
         this.light.position.y +=2;
@@ -120,6 +127,8 @@ export default class UniverseYoutube extends Scene {
             const dz = Math.abs(position.z - camera.position.z);
             if (dx < 1.2 && dz < minz) {
               panel.play();
+              this.iconBack.visible = i===0;
+              this.iconPrevious.visible = i!==0;
             } else {
               panel.pause();
             }
@@ -137,6 +146,7 @@ export default class UniverseYoutube extends Scene {
       }
     } else {
       this.iconBack.visible = false;
+      this.iconPrevious.visible = false;
       for (let i = 0; i < this.panels.length; i++) {
         const panel = this.panels[i];
         panel.update(dt, null, inputs);
