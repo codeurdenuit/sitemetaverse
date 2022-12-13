@@ -40,15 +40,17 @@ class PanelTweet extends THREE.Object3D {
       })
     );
 
+    let cleanText = '@Codeur_de_nuit  .  ' + new Date(date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: '2-digit' })
+    cleanText = cleanText.replace(/û/g, '')
     authorContainer.add(
       new ThreeMeshUI.Text({
-        content: '@Codeur_de_nuit  .  ' + new Date(date).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: '2-digit' }),
+        content: cleanText,
         fontColor: new THREE.Color(0x888888),
         fontSize: 0.055,
       })
     );
 
-    let cleanText = text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
+    cleanText = text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
     let hashtagsContainer;
     const hashList = text.match(/(^|\s)(#[a-z\d-]+)/ig);
     if (hashList) {

@@ -354,7 +354,7 @@ class Metaverse {
     }, 1000);
   }
   dismount() {
-    clearTimeout(this.tempoClose);
+    clearTimeout(this.tempoClose);  
     this.removeWindowEvents();
     this.removeVREvents();
     cancelAnimationFrame(this.requestAnimation);
