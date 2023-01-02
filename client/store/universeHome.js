@@ -68,7 +68,7 @@ export default {
         button: wording.rooms[0].button,
         vrOnly: false,
         colorShape: 0x000001,
-        links: [{ text: 'dungeonvr.codeurdenuit.fr', url: 'https://dungeonvr.codeurdenuit.fr/' }, { text: 'yobox.codeurdenuit.fr', url: 'https://yobox.codeurdenuit.fr' }],
+        links: [{ text: 'dungeonvr.codeurdenuit.fr', url: 'https://dungeonvr.codeurdenuit.fr/' }, { text: 'yobox.cd.fr', url: 'https://yobox.codeurdenuit.fr' }],
         position: { pc: new Vector3(3, 0.01, -13), mo: new Vector3(-3, 0.01, -13), vr: new Vector3(3, 0.01, -13) },
         panelPos: { pc: new Vector3(-3.5, 1, 1), mo: new Vector3(-0.2, 1, 2.8), vr: new Vector3(-3.5, 1, 1) },
         backPos: { pc: new Vector3(3.5, -0.95, 1.4), mo: new Vector3(0.7, -1, 0.2), vr: new Vector3(3.5, -0.95, 1.4) },
