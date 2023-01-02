@@ -18,8 +18,7 @@ export default {
     universeTest,
     universeHomeFake
   ],
-  //apiHost: location.port === '3000' ? 'http://localhost:3030' : 'http://api.codeurdenuit.fr',
-  apiHost: 'http://api.codeurdenuit.fr',
+  apiHost: 'https://api.codeurdenuit.fr',
   assets: {},
   goTo(indexUniverse, indexNode) {
     this.indexUniverse = indexUniverse,

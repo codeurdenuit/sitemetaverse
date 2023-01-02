@@ -56,6 +56,8 @@ class PanelTweet extends THREE.Object3D {
     if (hashList) {
       const texthashtag = hashList.map(val => val.replace('\n', '')).slice(0, 6).join(' ');
       cleanText = cleanText.replace(/(^|\s)(#[a-z\d-]+)/ig, '');
+      cleanText = cleanText.replace(/w+/ig, ''); //ce character n'existe pas en sprite FIX
+      
       hashtagsContainer = new ThreeMeshUI.Block({
         width: widthContent,
         height: 0.05,
@@ -80,7 +82,7 @@ class PanelTweet extends THREE.Object3D {
       this.link = 'https://' + links[0];
     }
 
-    const jumps = text.match(/(\n)/ig);
+    const jumps = text.match(/(\n)/ig)||[];
 
     if (jumps.length < 4 && cleanText.length < 250) {
       heightContent *= 0.64;

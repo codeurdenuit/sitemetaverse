@@ -21,7 +21,7 @@ export default class MultiVisitor {
 
     const rooms = await this.psc.getRooms();
     let room;
-    if (rooms[this.roomId]) {
+    if (rooms && rooms[this.roomId]) {
       room = await this.psc.joinRoom(this.roomId);
     } else {
       room = await this.psc.createRoom(this.roomId);
