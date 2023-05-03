@@ -74,9 +74,17 @@ export default class UniverseHome extends Scene {
         if (room.display) {
           store.indexNode = params.indexNode - 1;
           this.closeUniverse();
+          if(room.indexNode===1) {
+            const footer = document.getElementById('nowebgl');
+            if(footer) footer.className='show'
+          }
         } else {
           store.indexNode = params.indexNode;
           this.closeUniverse();
+          if(room.indexNode===1) {
+            const footer = document.getElementById('nowebgl');
+            if(footer) footer.className='hide'
+          }
         }
         this.panelInfo.hide();
       });

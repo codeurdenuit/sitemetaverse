@@ -13,7 +13,10 @@ class Metaverse {
     this.renderer.setSize(window.innerWidth*pixelDensity, window.innerHeight*pixelDensity, false);
     document.body.appendChild(this.renderer.domElement);
     if(pixelDensity < 1.5) {
-      document.body.appendChild(VRButton.createButton(this.renderer));
+      const button = VRButton.createButton(this.renderer);
+      button.style.top = '20px';
+      button.style.bottom = '';
+      document.body.appendChild(button);
     }
     this.renderer.xr.enabled = true;
     this.previousXR = false;

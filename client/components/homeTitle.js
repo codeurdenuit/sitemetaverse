@@ -78,7 +78,7 @@ export default class HomeTitle extends THREE.Object3D {
       })
     );
 
-    description.position.set(0, 1, 0);
+    description.position.set(0, 1.3, 0);
 
     this.add(description);
     this.description = description;
@@ -235,6 +235,8 @@ export default class HomeTitle extends THREE.Object3D {
             if (this.cbStart) {
               this.cbStart();
               this.nodeLang.remove();
+              const footer = document.getElementById('nowebgl');
+              if(footer) footer.className='hide'
             }
           }
         }

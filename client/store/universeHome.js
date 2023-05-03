@@ -44,7 +44,7 @@ export default {
   scene: {
     description:  wording.description,
     moonPos: { pc: new Vector3(0, 60, -220), mo: new Vector3(0, 60, -220), vr: new Vector3(0, 80, -220) },
-    titlePos: { pc: new Vector3(0, 0, -7), mo: new Vector3(0, 1, -3), vr: new Vector3(0, -2, -7) },
+    titlePos: { pc: new Vector3(0, 0, -7), mo: new Vector3(0, 2, -3), vr: new Vector3(0, -2, -7) },
     treePos: { pc: new Vector3(0, 0, -7), mo: new Vector3(-0.1, 2.4, -2), vr: new Vector3(0, -2, -7) },
     catPos: { pc: new Vector3(0, 0, -7), mo: new Vector3(-0.1, 2.4, -2), vr: new Vector3(0, -2, -7) },
     areaPos: { pc: new Vector3(1.5, 0, -5.5), mo: new Vector3(1.5, 0, -5.5), vr: new Vector3(1.5, 0, -5.5) },
@@ -68,7 +68,7 @@ export default {
         button: wording.rooms[0].button,
         vrOnly: false,
         colorShape: 0x000001,
-        links: [{ text: 'dungeonvr.codeurdenuit.fr', url: 'https://dungeonvr.codeurdenuit.fr/' }, { text: 'yobox.cd.fr', url: 'https://yobox.codeurdenuit.fr' }],
+        links: [{ text: 'dungeonvr.codeurdenuit.fr', url: 'https://dungeonvr.codeurdenuit.fr/' }, { text: 'yobox.cd.fr', url: 'https://yobox.codeurdenuit.fr/' }, { text: 'novelstudio.art', url: 'https://www.novelstudio.art' }],
         position: { pc: new Vector3(3, 0.01, -13), mo: new Vector3(-3, 0.01, -13), vr: new Vector3(3, 0.01, -13) },
         panelPos: { pc: new Vector3(-3.5, 1, 1), mo: new Vector3(-0.2, 1, 2.8), vr: new Vector3(-3.5, 1, 1) },
         backPos: { pc: new Vector3(3.5, -0.95, 1.4), mo: new Vector3(0.7, -1, 0.2), vr: new Vector3(3.5, -0.95, 1.4) },

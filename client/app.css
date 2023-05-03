@@ -1,0 +1,257 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+canvas {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+.lang {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 1rem;
+  font-size: 1.6rem;
+  z-index: 4;
+}
+.lang a {
+    color: white;
+}
+
+.block {
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+}
+
+section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  background-color: #0000008c;
+  padding: 0.2rem 0;
+  width: 100%;
+  z-index: 3;
+  transition: opacity 700ms;
+}
+
+section.show {
+  transition-delay: 1s;
+  opacity: 1;
+}
+
+section.hide {
+  opacity: 0;
+}
+
+section i {
+  margin-right: 0.3rem;
+  font-size: 1.5rem;
+}
+
+.block {
+  margin: 0rem 1rem;
+  max-width: 14rem;
+}
+
+h3 {
+  font-size: 0.9rem;
+  padding-left: 0.3rem;
+}
+
+section p,
+h3,
+a {
+  display: block;
+  margin: 0.2rem;
+  color: #d9b5d2;
+}
+
+.brand img {
+  width: 1.3rem;
+}
+
+
+.brand h3 {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+@media (max-width: 650px) {
+  section {
+    justify-content: start;
+  }
+  .brand {
+    display: none;
+  }
+}
+
+
+@font-face {
+  font-family: 'icons';
+  font-weight: 400;
+  font-style: normal;
+  src: url('icons.woff2') format('woff2');
+}
+
+i {
+  display: inline-block;
+  text-transform: none;
+  line-height: 1;
+  letter-spacing: normal;
+  font-family: 'icons';
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  display: inline-block;
+  margin-right: .2em;
+  margin-left: .2em;
+  width: 1em;
+  text-align: center;
+  text-transform: none;
+  text-decoration: inherit;
+  line-height: 1em;
+  font-family: "icons";
+  font-weight: normal;
+  font-variant: normal;
+  font-style: normal;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  speak: never;
+}
+
+.icon-mail:before {
+  content: '\e800';
+}
+
+.icon-megaphone:before {
+  content: '\e801';
+}
+
+.icon-edit:before {
+  content: '\e802';
+}
+
+.icon-folder:before {
+  content: '\e803';
+}
+
+.icon-lock:before {
+  content: '\e804';
+}
+
+.icon-lock-open:before {
+  content: '\e805';
+}
+
+.icon-star:before {
+  content: '\e806';
+}
+
+.icon-star-empty:before {
+  content: '\e807';
+}
+
+.icon-ok:before {
+  content: '\e808';
+}
+
+.icon-discord:before {
+  content: '\e809';
+}
+
+.icon-ko-fi_1:before {
+  content: '\e80a';
+}
+
+.icon-bell:before {
+  content: '\e80b';
+}
+
+.icon-android:before {
+  content: '\e80c';
+}
+
+.icon-appstore:before {
+  content: '\e80d';
+}
+
+.icon-cog-outline:before {
+  content: '\e80e';
+}
+
+.icon-pin-outline:before {
+  content: '\e80f';
+}
+
+.icon-location:before {
+  content: '\f031';
+}
+
+.icon-twitter:before {
+  content: '\f099';
+}
+
+.icon-coffee:before {
+  content: '\f0f4';
+}
+
+.icon-gamepad:before {
+  content: '\f11b';
+}
+
+.icon-flag:before {
+  content: '\f11d';
+}
+
+.icon-flag-checkered:before {
+  content: '\f11e';
+}
+
+.icon-youtube-squared:before {
+  content: '\f166';
+}
+
+.icon-youtube:before {
+  content: '\f16a';
+}
+
+.icon-android-1:before {
+  content: '\f17b';
+}
+
+.icon-linux:before {
+  content: '\f17c';
+}
+
+.icon-steam:before {
+  content: '\f1b6';
+}
+
+.icon-steam-squared:before {
+  content: '\f1b7';
+}
+
+.icon-share-squared:before {
+  content: '\f1e1';
+}
+
+.icon-twitter-squared:before {
+  content: '\f304';
+}
+
