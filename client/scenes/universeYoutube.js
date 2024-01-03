@@ -5,6 +5,7 @@ import Title from '../components/title';
 import Laser from '../components/laser';
 import PanelVideo from '../components/panelVideo';
 import store from '../store';
+import videosList from '../store/fakeYoutubeAPI';
 export default class UniverseYoutube extends Scene {
 
   async init() {
@@ -77,7 +78,8 @@ export default class UniverseYoutube extends Scene {
 
 
     this.panels = [];
-    fetch(store.apiHost + '/api/youtube', { method: 'GET' }).then(async response => {
+    //api no longer exists
+    /*fetch(store.apiHost + '/api/youtube', { method: 'GET' }).then(async response => {
       const videos = await response.json();
       for (let i = 0; i < videos.length; i++) {
         const video = videos[i];
@@ -90,10 +92,21 @@ export default class UniverseYoutube extends Scene {
         });
       }
       this.onDeviceChange(store.device);
-    });
+    });*/
 
     this.laser = new Laser();
     this.add(this.laser);
+
+    videosList.forEach((video, i)=> {
+      const panel = new PanelVideo(video.title, video.description, video.video, video.link, video.thumbnail, shadow.clone());
+      panel.position.set(0 + i * -3, i + 8, -27.5);
+      this.root.add(panel);
+      this.panels.push(panel);
+      panel.onClick(() => {
+        store.indexNode = i;
+      });
+    })
+    this.onDeviceChange(store.device);
   }
 
   onClosed() {

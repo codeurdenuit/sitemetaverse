@@ -72,7 +72,8 @@ class Metaverse {
 
     this.updateDevice();
 
-    setTimeout(this.syncMultiVR.bind(this), 10000);
+    //no api, no visible multi-visitors
+    //setTimeout(this.syncMultiVR.bind(this), 10000);
   }
 
   prepareWindowEvent(eventName) {

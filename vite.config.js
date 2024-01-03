@@ -6,9 +6,12 @@ export default defineConfig({
   publicDir: '../public',
   build: {
     outDir: '../.dist',
+    minify: true,
+    emptyOutDir: true,
     rollupOptions: {
       output: {
-        manualChunks: {}
+        manualChunks: {},
+        format: 'iife'
       }
     }
   },

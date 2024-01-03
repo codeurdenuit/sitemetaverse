@@ -4,6 +4,7 @@ import Icon from '../components/icon';
 import Laser from '../components/laser';
 import PanelTweet from '../components/panelTweet';
 import store from '../store';
+import twitterList from '../store/fakeTwitterAPI';
 
 export default class UniverseTwitter extends Scene {
 
@@ -71,7 +72,8 @@ export default class UniverseTwitter extends Scene {
     this.panels = [];
 
     const nodes = store.universes[this.index].nodes;
-    fetch(store.apiHost + '/api/twitter', { method: 'GET' }).then(async response => {
+   //api no longer exists
+   /* fetch(store.apiHost + '/api/twitter', { method: 'GET' }).then(async response => {
       const tweets = await response.json();
       const angleStep = Math.PI / 9;
       const angleRange = angleStep * tweets.length;
@@ -94,11 +96,32 @@ export default class UniverseTwitter extends Scene {
           store.indexNode = i;
         });
       }
-    });
+    });*/
 
     this.laser = new Laser();
     this.add(this.laser);
     this.topPanel = 0.45;
+
+    const angleStep = Math.PI / 9;
+    const angleRange = angleStep * twitterList.length;
+    const angleStart = Math.PI / 2 - angleRange / 2;
+    twitterList.forEach((tweet, i) => {
+      const camTarget = nodes[i].camTarget[store.device];
+      const panel = new PanelTweet(tweet.text, tweet.created_at, tweet.thumbnail);
+      panel.position.set(camTarget.x, i + 2, camTarget.z);
+      panel.rotation.y = angleStep * i + angleStart - Math.PI / 2;
+
+      this.root.add(panel);
+      this.panels.push(panel);
+
+      panel.onClick(() => {
+        if (store.indexNode === i && panel.link) {
+          location.href = panel.link;
+        }
+        store.indexNode = i;
+      });
+    })
+
   }
 
 
